@@ -221,6 +221,15 @@
       font-family: var(--sans);
     }
 
+    .toolbar-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--mid);
+      margin: 0 4px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
     .filter-btn {
       padding: 6px 14px;
       border-radius: 3px;
@@ -684,10 +693,13 @@
     <button class="filter-btn active" onclick="setFilter('all',this)">전체</button>
     <button class="filter-btn" onclick="setFilter('인턴',this)">인턴</button>
     <button class="filter-btn" onclick="setFilter('신입',this)">신입 / 풀타임</button>
-    <button class="filter-btn" onclick="setFilter('금융',this)">금융</button>
-    <button class="filter-btn" onclick="setFilter('마케팅',this)">마케팅</button>
-    <button class="filter-btn" onclick="setFilter('컨설팅',this)">컨설팅</button>
-    <button class="filter-btn" onclick="setFilter('기타',this)">기타</button>
+    <span class="toolbar-divider"></span>
+    <button class="filter-btn" onclick="setFilter('Finance',this)">Finance</button>
+    <button class="filter-btn" onclick="setFilter('Consulting',this)">Consulting</button>
+    <button class="filter-btn" onclick="setFilter('Marketing',this)">Marketing</button>
+    <button class="filter-btn" onclick="setFilter('Tech',this)">Tech</button>
+    <button class="filter-btn" onclick="setFilter('HR',this)">HR</button>
+    <button class="filter-btn" onclick="setFilter('Others',this)">Others</button>
   </div>
 
   <div class="result-bar">
@@ -749,10 +761,12 @@
           <div class="form-group">
             <label class="form-label">분야</label>
             <select id="f-sector">
-              <option value="금융">금융</option>
-              <option value="마케팅">마케팅</option>
-              <option value="컨설팅">컨설팅</option>
-              <option value="기타">기타</option>
+              <option value="Finance">Finance</option>
+              <option value="Consulting">Consulting</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Tech">Tech</option>
+              <option value="HR">HR</option>
+              <option value="Others">Others</option>
             </select>
           </div>
         </div>
@@ -795,9 +809,9 @@
   // ── 데이터 ──
   // 실제 배포 시: localStorage 또는 Supabase DB로 교체
   let jobs = [
-    { id:1, company:'BNP Paribas Securities Korea', title:'Global Markets Assistant (6M FTC)', type:'인턴', sector:'금융', link:'https://www.linkedin.com/jobs/view/4415361100/', note:'6개월 인턴', date:'2026-05-16' },
-    { id:2, company:'Mitsubishi UFJ Financial Group (MUFG)', title:'Junior FX Trader', type:'신입', sector:'금융', link:'https://www.linkedin.com/jobs/view/4414748248/', note:'', date:'2026-05-16' },
-    { id:3, company:'Walt Disney (Korea)', title:'Intern, Creative Strategy Marketing', type:'인턴', sector:'마케팅', link:'', note:'5학기 이상 수료자 · 1명 모집', date:'2026-05-16' },
+    { id:1, company:'BNP Paribas Securities Korea', title:'Global Markets Assistant (6M FTC)', type:'인턴', sector:'Finance', link:'https://www.linkedin.com/jobs/view/4415361100/', note:'6개월 인턴', date:'2026-05-16' },
+    { id:2, company:'Mitsubishi UFJ Financial Group (MUFG)', title:'Junior FX Trader', type:'신입', sector:'Finance', link:'https://www.linkedin.com/jobs/view/4414748248/', note:'', date:'2026-05-16' },
+    { id:3, company:'Walt Disney (Korea)', title:'Intern, Creative Strategy Marketing', type:'인턴', sector:'Marketing', link:'', note:'5학기 이상 수료자 · 1명 모집', date:'2026-05-16' },
   ];
   let nextId = 4;
   let currentFilter = 'all';
