@@ -1,32 +1,891 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE BRIDGE — 유학생 인턴·신입 공고</title>
+  <meta name="description" content="THE BRIDGE가 직접 큐레이션한 해외 유학생을 위한 국내 인턴·신입 공고 모음">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,900;1,400&family=Noto+Serif+KR:wght@400;600;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-THE BRIDGE
-공고 보기
-관리자 0
-THE BRIDGE · 유학생 채용 공고
-국내 인턴·신입 공고 모음
-해외 유학생을 위해 THE BRIDGE 운영팀이 직접 큐레이션한 국내 인턴 및 신입 공고만 모았습니다. 카카오톡 채널에서 실시간 업데이트를 받아보세요.
-문의  → 
-thebridgeteamkr@gmail.com
+    :root {
+      --black: #0a0a0a;
+      --white: #fafaf8;
+      --off-white: #f2f0eb;
+      --mid: #e8e5de;
+      --muted: #9a9488;
+      --accent: #c8b89a;
+      --serif: 'Bodoni Moda', 'Noto Serif KR', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
 
-카카오톡 채널
-참여하기
-💬 채널 참여
-필터
-전체
-인턴
-신입 / 풀타임
+    html { scroll-behavior: smooth; }
 
-Finance
-Consulting
-Marketing
-Tech
-HR
-Others
-0개 공고
-아직 공고가 없어요
-관리자 탭에서 첫 공고를 추가해보세요
-THE BRIDGE
-문의 thebridgeteamkr@gmail.com  ·  © 2026 THE BRIDGE
-관리자 접근
-비밀번호를 입력하세요
-확인 취소
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--black);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }/* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--white);
+      border-bottom: 1px solid var(--mid);
+      padding: 0 40px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-logo-text {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: -0.5px;
+      color: var(--black);
+    }
+
+    .nav-tabs { display: flex; gap: 4px; }
+
+    .nav-tab {
+      padding: 7px 16px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: var(--sans);
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.2s;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-tab:hover { color: var(--black); }
+
+    .nav-tab.active {
+      border-color: var(--black);
+      color: var(--black);
+    }
+
+    .nav-badge {
+      background: var(--black);
+      color: var(--white);
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 20px;
+      margin-left: 5px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: #0a0a0a;
+      padding: 64px 40px 56px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 28px;
+    }
+
+    .hero-contact {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #6a6560;
+    }
+
+    .hero-contact a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .hero-contact a:hover { border-bottom-color: var(--accent); }
+
+    .qr-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 20px;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      background: #111;
+      min-width: 140px;
+    }
+
+    .qr-block img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .qr-cta { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.5; }
+
+    .kakao-btn {
+      background: #FEE500;
+      color: #3A1D1D;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }/* ── TOOLBAR ── */
+    .toolbar {
+      padding: 24px 40px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--mid);
+    }
+
+    .toolbar-label {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-right: 4px;
+    }
+
+    .toolbar-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--mid);
+      margin: 0 4px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-family: var(--sans);
+      cursor: pointer;
+      border: 1px solid var(--mid);
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .filter-btn:hover { border-color: var(--black); color: var(--black); }
+    .filter-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    .result-bar {
+      padding: 16px 40px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .result-count { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; }
+
+    /* ── JOB GRID ── */
+    .job-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--mid);
+      border: 1px solid var(--mid);
+      margin: 16px 40px 60px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .job-card {
+      background: var(--white);
+      padding: 24px;
+      transition: background 0.15s;
+    }
+
+    .job-card:hover { background: var(--off-white); }
+
+    .job-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .company-initial {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--mid);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+
+    .type-badge {
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: 2px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .badge-intern { background: #eaf3e2; color: #3a6b28; }
+    .badge-full   { background: #e3edf8; color: #1d4e8f; }
+
+    .job-title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--black);
+      margin-bottom: 5px;
+    }
+
+    .job-company { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+
+    .job-note {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      border-left: 2px solid var(--mid);
+      padding-left: 10px;
+    }
+
+    .job-footer { display: flex; align-items: center; justify-content: space-between; }
+
+    .job-date { font-size: 11px; color: #ccc8c0; }
+
+    .job-link {
+      font-size: 12px;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--mid);
+      padding-bottom: 1px;
+      transition: border-color 0.15s;
+    }
+
+    .job-link:hover { border-color: var(--black); }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 40px;
+      background: var(--white);
+    }
+
+    .empty-title { font-family: var(--serif); font-size: 22px; font-style: italic; color: var(--muted); margin-bottom: 8px; }
+    .empty-sub { font-size: 13px; color: #ccc8c0; }/* ── ADMIN ── */
+    #view-admin { display: none; }
+
+    .admin-header { padding: 40px 40px 0; margin-bottom: 32px; }
+
+    .admin-header h2 {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: 28px;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+
+    .admin-header p { font-size: 13px; color: var(--muted); }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--mid);
+      border: 1px solid var(--mid);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 0 40px 32px;
+    }
+
+    .stat-box { background: var(--white); padding: 20px 24px; }
+
+    .stat-num {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: 32px;
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.2px; }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      padding: 0 40px 60px;
+    }
+
+    @media (max-width: 700px) {
+      .admin-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 20px; }
+      .hero { padding: 40px 20px; grid-template-columns: 1fr; }
+      .qr-block { display: none; }
+      .toolbar, .result-bar { padding-left: 20px; padding-right: 20px; }
+      .job-grid { margin: 16px 20px 40px; }
+      .admin-grid, .admin-header { margin-left: 20px; margin-right: 20px; padding-left: 0; padding-right: 0; }
+      .stats-row { margin-left: 20px; margin-right: 20px; }
+    }
+
+    .admin-panel { border: 1px solid var(--mid); border-radius: 6px; overflow: hidden; }
+
+    .panel-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--mid);
+      background: var(--off-white);
+    }
+
+    .panel-head h3 { font-family: var(--serif); font-weight: 600; font-size: 16px; color: var(--black); }
+
+    .panel-body { padding: 20px; background: var(--white); }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .form-group { margin-bottom: 14px; }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], input[type="url"], select, textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--mid);
+      border-radius: 3px;
+      font-size: 13px;
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--black);
+      transition: border-color 0.15s;
+      appearance: none;
+    }
+
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--black); }
+    textarea { resize: vertical; min-height: 72px; line-height: 1.6; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 3px;
+      font-size: 13px;
+      font-family: var(--sans);
+      font-weight: 500;
+      cursor: pointer;
+      background: var(--black);
+      color: var(--white);
+      letter-spacing: 0.5px;
+      transition: opacity 0.15s;
+      margin-top: 4px;
+    }
+
+    .btn-submit:hover { opacity: 0.8; }
+
+    .admin-list { display: flex; flex-direction: column; max-height: 500px; overflow-y: auto; }
+
+    .admin-item {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--mid);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      transition: background 0.1s;
+    }
+
+    .admin-item:hover { background: var(--off-white); }
+    .admin-item:last-child { border-bottom: none; }
+
+    .ai-info { flex: 1; min-width: 0; }
+
+    .ai-title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--black);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 3px;
+    }
+
+    .ai-sub { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+
+    .btn-del {
+      padding: 4px 10px;
+      border: 1px solid var(--mid);
+      border-radius: 3px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      cursor: pointer;
+      font-family: var(--sans);
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+
+    .btn-del:hover { background: #fce8e8; color: #9b2c2c; border-color: #f5b8b8; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-logo { font-family: var(--serif); font-weight: 900; font-size: 16px; color: var(--white); }
+    .footer-info { font-size: 12px; color: #5a5550; }
+    .footer-info a { color: var(--accent); text-decoration: none; }
+    .footer-info a:hover { text-decoration: underline; }
+
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--black);
+      color: var(--white);
+      padding: 11px 18px;
+      border-radius: 4px;
+      font-size: 13px;
+      display: none;
+      z-index: 999;
+      border: 1px solid #333;
+    }
+
+    .toast.show { display: block; animation: fadeUp 0.2s ease; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body><nav>
+  <div class="nav-logo">
+    <img src="logo.jpeg" alt="THE BRIDGE 로고" onerror="this.style.display='none'">
+    <span class="nav-logo-text">THE BRIDGE</span>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('public')" id="tab-public">공고 보기</button>
+    <button class="nav-tab" onclick="switchTab('admin')" id="tab-admin">
+      관리자 <span class="nav-badge" id="count-badge">0</span>
+    </button>
+  </div>
+</nav>
+
+<div id="view-public">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">THE BRIDGE · 유학생 채용 공고</div>
+      <h1 class="hero-title">국내 인턴·신입<br><em>공고 모음</em></h1>
+      <p class="hero-desc">
+        해외 유학생을 위해 THE BRIDGE 운영팀이 직접 큐레이션한<br>
+        국내 인턴 및 신입 공고만 모았습니다.<br>
+        카카오톡 채널에서 실시간 업데이트를 받아보세요.
+      </p>
+      <div class="hero-contact">
+        문의 &nbsp;→&nbsp;
+        <a href="mailto:thebridgeteamkr@gmail.com">thebridgeteamkr@gmail.com</a>
+      </div>
+    </div>
+    <div class="qr-block">
+      <img src="qr-code.jpeg" alt="카카오톡 채널 QR 코드">
+      <div class="qr-cta">카카오톡 채널<br>참여하기</div>
+      <span class="kakao-btn">💬 채널 참여</span>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <span class="toolbar-label">필터</span>
+    <button class="filter-btn active" onclick="setFilter('all',this)">전체</button>
+    <button class="filter-btn" onclick="setFilter('인턴',this)">인턴</button>
+    <button class="filter-btn" onclick="setFilter('신입',this)">신입 / 풀타임</button>
+    <span class="toolbar-divider"></span>
+    <button class="filter-btn" onclick="setFilter('Finance',this)">Finance</button>
+    <button class="filter-btn" onclick="setFilter('Consulting',this)">Consulting</button>
+    <button class="filter-btn" onclick="setFilter('Marketing',this)">Marketing</button>
+    <button class="filter-btn" onclick="setFilter('Tech',this)">Tech</button>
+    <button class="filter-btn" onclick="setFilter('HR',this)">HR</button>
+    <button class="filter-btn" onclick="setFilter('Others',this)">Others</button>
+  </div>
+
+  <div class="result-bar">
+    <span class="result-count" id="result-count">0개 공고</span>
+  </div>
+
+  <div class="job-grid" id="job-grid">
+    <div class="empty-state">
+      <div class="empty-title">아직 공고가 없어요</div>
+      <div class="empty-sub">관리자 탭에서 첫 공고를 추가해보세요</div>
+    </div>
+  </div>
+</div><div id="view-admin">
+  <div class="admin-header">
+    <h2>공고 관리</h2>
+    <p>카톡방에서 공고를 받으면 여기에 입력하세요</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num" id="stat-total">0</div>
+      <div class="stat-label">전체 공고</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" id="stat-intern">0</div>
+      <div class="stat-label">인턴</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" id="stat-full">0</div>
+      <div class="stat-label">신입 / 풀타임</div>
+    </div>
+  </div>
+
+  <div class="admin-grid">
+    <div class="admin-panel">
+      <div class="panel-head"><h3>새 공고 추가</h3></div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label class="form-label">회사명 *</label>
+          <input type="text" id="f-company" placeholder="예: BNP Paribas Securities Korea">
+        </div>
+        <div class="form-group">
+          <label class="form-label">포지션 *</label>
+          <input type="text" id="f-title" placeholder="예: Global Markets Assistant (6M FTC)">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">고용 형태</label>
+            <select id="f-type">
+              <option value="인턴">인턴</option>
+              <option value="신입">신입 / 풀타임</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">분야</label>
+            <select id="f-sector">
+              <option value="Finance">Finance</option>
+              <option value="Consulting">Consulting</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Tech">Tech</option>
+              <option value="HR">HR</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">지원 링크</label>
+          <input type="url" id="f-link" placeholder="https://www.linkedin.com/jobs/view/...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">메모</label>
+          <textarea id="f-note" placeholder="자격요건, 마감일, 특이사항 등..."></textarea>
+        </div>
+        <button class="btn-submit" onclick="addJob()">공고 추가하기 →</button>
+      </div>
+    </div>
+
+    <div class="admin-panel">
+      <div class="panel-head">
+        <h3>등록된 공고 <span id="admin-list-count" style="font-family:var(--sans);font-weight:400;font-size:13px;color:var(--muted);"></span></h3>
+      </div>
+      <div class="admin-list" id="admin-list">
+        <div style="padding:40px;text-align:center;color:var(--muted);font-size:13px;">등록된 공고가 없어요</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">THE BRIDGE</div>
+  <div class="footer-info">
+    문의 <a href="mailto:thebridgeteamkr@gmail.com">thebridgeteamkr@gmail.com</a>
+    &nbsp;·&nbsp; © 2026 THE BRIDGE
+  </div>
+</footer><div id="pw-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;align-items:center;justify-content:center;">
+  <div style="background:var(--white);border-radius:8px;padding:32px;width:320px;text-align:center;">
+    <div style="font-family:var(--serif);font-size:20px;font-weight:900;margin-bottom:8px;">관리자 접근</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">비밀번호를 입력하세요</div>
+    <input type="password" id="pw-input" placeholder="비밀번호" style="width:100%;padding:10px 12px;border:1px solid var(--mid);border-radius:4px;font-size:14px;margin-bottom:12px;font-family:var(--sans);">
+    <button onclick="checkPassword()" style="width:100%;padding:10px;background:var(--black);color:var(--white);border:none;border-radius:4px;font-size:13px;cursor:pointer;font-family:var(--sans);">확인</button>
+    <button onclick="closeModal()" style="width:100%;padding:10px;background:transparent;color:var(--muted);border:none;font-size:13px;cursor:pointer;margin-top:8px;font-family:var(--sans);">취소</button>
+    <div id="pw-error" style="color:#c0392b;font-size:12px;margin-top:8px;display:none;">비밀번호가 틀렸어요</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SUPABASE_URL = 'https://mvvxkiicbsucnrgpagxy.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12dnhraWljYnN1Y25yZ3BhZ3h5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxODM4OTMsImV4cCI6MjA5NDc1OTg5M30.CSLk_0CTtOI-r8RZ3QwcG4D-3epSj9ptguuJEzg0yQU';
+  const ADMIN_PASSWORD = 'thebridge2026';
+
+  const api = (path, opts = {}) => fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': opts.prefer || '',
+      ...opts.headers
+    },
+    ...opts
+  });
+
+  let jobs = [];
+  let currentFilter = 'all';
+  let isAdmin = false;
+
+  function openAdminTab() {
+    if (isAdmin) {
+      showAdminView();
+    } else {
+      const modal = document.getElementById('pw-modal');
+      modal.style.display = 'flex';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-error').style.display = 'none';
+      setTimeout(() => document.getElementById('pw-input').focus(), 100);
+    }
+  }
+
+  function checkPassword() {
+    const val = document.getElementById('pw-input').value;
+    if (val === ADMIN_PASSWORD) {
+      isAdmin = true;
+      document.getElementById('pw-modal').style.display = 'none';
+      showAdminView();
+    } else {
+      document.getElementById('pw-error').style.display = 'block';
+    }
+  }
+
+  document.getElementById('pw-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  function closeModal() {
+    document.getElementById('pw-modal').style.display = 'none';
+  }
+
+  function showAdminView() {
+    document.getElementById('view-public').style.display = 'none';
+    document.getElementById('view-admin').style.display = '';
+    document.getElementById('tab-public').className = 'nav-tab';
+    document.getElementById('tab-admin').className = 'nav-tab active';
+    renderAdminList();
+  }
+
+  function switchTab(tab) {
+    if (tab === 'admin') { openAdminTab(); return; }
+    document.getElementById('view-public').style.display = '';
+    document.getElementById('view-admin').style.display = 'none';
+    document.getElementById('tab-public').className = 'nav-tab active';
+    document.getElementById('tab-admin').className = 'nav-tab';
+  }
+
+  function setFilter(f, btn) {
+    currentFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderJobGrid();
+  }
+
+  function getInitial(company) { return company.trim().charAt(0).toUpperCase(); }
+  function formatDate(d) { return d ? d.slice(0,10).replace(/-/g, '.') : ''; }async function loadJobs() {
+    const grid = document.getElementById('job-grid');
+    grid.innerHTML = '<div class="empty-state"><div class="empty-title">불러오는 중...</div></div>';
+    try {
+      const res = await api('jobs?select=*&order=id.desc');
+      const data = await res.json();
+      jobs = Array.isArray(data) ? data : [];
+      renderJobGrid();
+    } catch(e) {
+      jobs = [];
+      grid.innerHTML = '<div class="empty-state"><div class="empty-title">불러오기 실패</div><div class="empty-sub">페이지를 새로고침해보세요</div></div>';
+    }
+  }
+
+  function renderJobGrid() {
+    const grid = document.getElementById('job-grid');
+    let list = currentFilter === 'all'
+      ? jobs
+      : jobs.filter(j => j.type === currentFilter || j.sector === currentFilter);
+
+    document.getElementById('result-count').textContent = (list ? list.length : 0) + '개 공고';
+    document.getElementById('count-badge').textContent  = jobs ? jobs.length : 0;
+
+    if (!list.length) {
+      grid.innerHTML = '<div class="empty-state"><div class="empty-title">해당 조건의 공고가 없어요</div><div class="empty-sub">다른 필터를 선택해보세요</div></div>';
+      return;
+    }
+
+    grid.innerHTML = list.map(j => `
+      <div class="job-card">
+        <div class="job-card-header">
+          <div class="company-initial">${getInitial(j.company)}</div>
+          <span class="type-badge ${j.type === '인턴' ? 'badge-intern' : 'badge-full'}">${j.type}</span>
+        </div>
+        <div class="job-title">${j.title}</div>
+        <div class="job-company">${j.company}</div>
+        ${j.note ? `<div class="job-note">${j.note}</div>` : ''}
+        <div class="job-footer">
+          <span class="job-date">${formatDate(j.created_at)}</span>
+          ${j.link
+            ? `<a class="job-link" href="${j.link}" target="_blank" rel="noopener">지원하기 →</a>`
+            : `<span style="font-size:11px;color:#ccc8c0;">링크 없음</span>`}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderAdminList() {
+    const list = document.getElementById('admin-list');
+    document.getElementById('admin-list-count').textContent = '(' + jobs.length + ')';
+    document.getElementById('stat-total').textContent  = jobs.length;
+    document.getElementById('stat-intern').textContent = jobs.filter(j => j.type === '인턴').length;
+    document.getElementById('stat-full').textContent   = jobs.filter(j => j.type !== '인턴').length;
+
+    if (!jobs.length) {
+      list.innerHTML = '<div style="padding:40px;text-align:center;color:var(--muted);font-size:13px;">등록된 공고가 없어요</div>';
+      return;
+    }
+
+    list.innerHTML = jobs.map(j => `
+      <div class="admin-item">
+        <div class="ai-info">
+          <div class="ai-title">${j.title}</div>
+          <div class="ai-sub">
+            ${j.company}
+            <span class="type-badge ${j.type === '인턴' ? 'badge-intern' : 'badge-full'}" style="font-size:10px;padding:2px 7px;">${j.type}</span>
+          </div>
+        </div>
+        <button class="btn-del" onclick="deleteJob('${j.id}')">삭제</button>
+      </div>
+    `).join('');
+  }async function addJob() {
+    const company = document.getElementById('f-company').value.trim();
+    const title   = document.getElementById('f-title').value.trim();
+    if (!company || !title) { showToast('회사명과 포지션은 필수예요!'); return; }
+
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = '저장 중...';
+    btn.disabled = true;
+
+    try {
+      const res = await api('jobs', {
+        method: 'POST',
+        prefer: 'return=representation',
+        body: JSON.stringify({
+          company,
+          title,
+          type:   document.getElementById('f-type').value,
+          sector: document.getElementById('f-sector').value,
+          link:   document.getElementById('f-link').value.trim(),
+          note:   document.getElementById('f-note').value.trim(),
+        })
+      });
+      const [newJob] = await res.json();
+      jobs.unshift(newJob);
+      ['f-company','f-title','f-link','f-note'].forEach(id => document.getElementById(id).value = '');
+      renderAdminList();
+      renderJobGrid();
+      showToast('공고가 추가됐어요 ✓');
+    } catch(e) {
+      showToast('저장 실패 — 다시 시도해주세요');
+    }
+
+    btn.textContent = '공고 추가하기 →';
+    btn.disabled = false;
+  }
+
+  async function deleteJob(id) {
+    try {
+      await api(`jobs?id=eq.${id}`, { method: 'DELETE' });
+      jobs = jobs.filter(j => j.id !== id);
+      renderAdminList();
+      renderJobGrid();
+      showToast('공고가 삭제됐어요');
+    } catch(e) {
+      showToast('삭제 실패 — 다시 시도해주세요');
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  loadJobs();
+</script>
+</body>
+</html>
