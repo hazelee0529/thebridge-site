@@ -909,9 +909,11 @@
     grid.innerHTML = '<div class="empty-state"><div class="empty-title">불러오는 중...</div></div>';
     try {
       const res = await api('jobs?select=*&order=created_at.desc');
-      jobs = await res.json();
+      const data = await res.json();
+      jobs = Array.isArray(data) ? data : [];
       renderJobGrid();
     } catch(e) {
+      jobs = [];
       grid.innerHTML = '<div class="empty-state"><div class="empty-title">불러오기 실패</div><div class="empty-sub">페이지를 새로고침해보세요</div></div>';
     }
   }
@@ -923,8 +925,8 @@
       ? jobs
       : jobs.filter(j => j.type === currentFilter || j.sector === currentFilter);
 
-    document.getElementById('result-count').textContent = list.length + '개 공고';
-    document.getElementById('count-badge').textContent  = jobs.length;
+    document.getElementById('result-count').textContent = (list ? list.length : 0) + '개 공고';
+    document.getElementById('count-badge').textContent  = jobs ? jobs.length : 0;
 
     if (!list.length) {
       grid.innerHTML = '<div class="empty-state"><div class="empty-title">해당 조건의 공고가 없어요</div><div class="empty-sub">다른 필터를 선택해보세요</div></div>';
