@@ -763,7 +763,7 @@
     const grid = document.getElementById('job-grid');
     grid.innerHTML = '<div class="empty-state"><div class="empty-title">불러오는 중...</div></div>';
     try {
-      const res = await api('jobs?select=*&order=id.desc');
+      const res = await api('jobs?select=*');
       const data = await res.json();
       jobs = Array.isArray(data) ? data : [];
       renderJobGrid();
