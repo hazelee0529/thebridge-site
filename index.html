@@ -323,6 +323,17 @@
 
     .job-link:hover { border-color: var(--black); }
 
+    .job-link-kakao {
+      font-size: 12px;
+      color: #3a6b28;
+      text-decoration: none;
+      border-bottom: 1px solid #c8e0c0;
+      padding-bottom: 1px;
+      transition: border-color 0.15s;
+    }
+
+    .job-link-kakao:hover { border-color: #3a6b28; }
+
     .empty-state {
       grid-column: 1 / -1;
       text-align: center;
@@ -589,7 +600,9 @@
       <div class="empty-sub">관리자 탭에서 첫 공고를 추가해보세요</div>
     </div>
   </div>
-</div><div id="view-admin" style="display:none">
+</div>
+
+<div id="view-admin" style="display:none">
   <div class="admin-header">
     <h2>공고 관리</h2>
     <p>카톡방에서 공고를 받으면 여기에 입력하세요</p>
@@ -671,7 +684,9 @@
     문의 <a href="mailto:thebridgeteamkr@gmail.com">thebridgeteamkr@gmail.com</a>
     &nbsp;·&nbsp; © 2026 THE BRIDGE
   </div>
-</footer><div id="pw-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;align-items:center;justify-content:center;">
+</footer>
+
+<div id="pw-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;align-items:center;justify-content:center;">
   <div style="background:var(--white);border-radius:8px;padding:32px;width:320px;text-align:center;">
     <div style="font-family:var(--serif);font-size:20px;font-weight:900;margin-bottom:8px;">관리자 접근</div>
     <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">비밀번호를 입력하세요</div>
@@ -688,6 +703,7 @@
   const SUPABASE_URL = 'https://mvvxkiicbsucnrgpagxy.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12dnhraWljYnN1Y25yZ3BhZ3h5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxODM4OTMsImV4cCI6MjA5NDc1OTg5M30.CSLk_0CTtOI-r8RZ3QwcG4D-3epSj9ptguuJEzg0yQU';
   const ADMIN_PASSWORD = 'thebridge2026';
+  const KAKAO_LINK = 'https://open.kakao.com/o/ghokv1pi';
 
   const api = (path, opts = {}) => fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
     headers: {
@@ -759,7 +775,9 @@
   }
 
   function getInitial(company) { return company.trim().charAt(0).toUpperCase(); }
-  function formatDate(d) { return d ? d.slice(0,10).replace(/-/g, '.') : ''; }async function loadJobs() {
+  function formatDate(d) { return d ? d.slice(0,10).replace(/-/g, '.') : ''; }
+
+  async function loadJobs() {
     const grid = document.getElementById('job-grid');
     grid.innerHTML = '<div class="empty-state"><div class="empty-title">불러오는 중...</div></div>';
     try {
@@ -800,7 +818,7 @@
           <span class="job-date">${formatDate(j.created_at)}</span>
           ${j.link
             ? `<a class="job-link" href="${j.link}" target="_blank" rel="noopener">지원하기 →</a>`
-            : `<span style="font-size:11px;color:#ccc8c0;">링크 없음</span>`}
+            : `<a class="job-link-kakao" href="${KAKAO_LINK}" target="_blank" rel="noopener">단톡방에서 확인하기 →</a>`}
         </div>
       </div>
     `).join('');
@@ -830,7 +848,9 @@
         <button class="btn-del" onclick="deleteJob('${j.id}')">삭제</button>
       </div>
     `).join('');
-  }async function addJob() {
+  }
+
+  async function addJob() {
     const company = document.getElementById('f-company').value.trim();
     const title   = document.getElementById('f-title').value.trim();
     if (!company || !title) { showToast('회사명과 포지션은 필수예요!'); return; }
